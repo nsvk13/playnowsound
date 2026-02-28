@@ -12,6 +12,7 @@ from nowplaying.bot.reporter import report_error
 from nowplaying.core.database import db
 from nowplaying.external.udownloader import UdownloaderError, download
 from nowplaying.models.cached_file import CachedFile
+from nowplaying.models.song_link import SongLinkPlatformType
 from nowplaying.models.track import Track
 from nowplaying.models.user_config import UserConfig
 from nowplaying.util.logger import logger
@@ -43,11 +44,13 @@ async def _get_cached_file(
 
     # Cache missed, downloading
     song_link = await track.song_link()
+    yandex_token = await db.get_user_token(from_user.id, SongLinkPlatformType.YANDEX)
     try:
         downloaded = await download(
             song_link,  # type: ignore[arg-type]
             download_flac=user_config.download_flac,
             fast_route=user_config.fast_download_route,
+            yandex_token=yandex_token,
         )
     except UdownloaderError as err:
         await _unavailable(caption, str(err), inline_message_id, user_config)
