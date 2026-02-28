@@ -24,6 +24,7 @@ services:
     ports:
       - "50051:50051"
   telegram-bot-api:
+    profiles: ["selfhosted-telegram-api"]
     image: ghcr.io/es3n1n/telegram-bot-api:latest
     restart: unless-stopped
     container_name: nowplaying-bot-api
@@ -36,6 +37,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - tg_data:/var/lib/telegram-bot-api
   bot-api-janitor:
+    profiles: ["selfhosted-telegram-api"]
     image: bot-api-janitor:latest
     restart: unless-stopped
     container_name: nowplaying-bot-api-janitor
