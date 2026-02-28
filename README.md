@@ -48,6 +48,28 @@ cp .env.example .env
 
 Edit the `.env` file with your preferred text editor and add the necessary API keys and configurations.
 
+### `.env` quick reference
+
+Minimal required values to start your own fork:
+
+- `BOT_TOKEN`: Telegram bot token from [@BotFather](https://t.me/BotFather).
+- `BOT_URL`: Public bot URL, usually `https://t.me/<your_bot_username>`.
+- `BOT_CACHE_CHAT_ID`: ID of your private Telegram channel/chat used for file cache uploads.
+- `STATE_SECRET`: Random long string used to sign auth state.
+- `WEB_SERVER_PUBLIC_ENDPOINT`: Public HTTPS endpoint of your backend, e.g. `https://your-domain.com`.
+- `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`: Your PostgreSQL credentials.
+- `SPOTIFY_CLIENT_ID`, `SPOTIFY_SECRET`: Spotify app credentials (if Spotify auth is needed).
+- `LASTFM_API_KEY`, `LASTFM_SHARED_SECRET`: Last.fm API credentials.
+- `APPLE_SECRET_KEY`, `APPLE_KEY_ID`, `APPLE_TEAM_ID`: Apple Music developer credentials.
+
+Optional / environment-specific:
+
+- `LOCAL_TELEGRAM_API_BASE_URL`, `TELEGRAM_API_ID`, `TELEGRAM_API_HASH`: needed for local Telegram Bot API instance.
+- `BOT_DEV_CHAT_ID`: chat ID for internal error reports.
+- `UDOWNLOADER_*`: external downloader service endpoint (used as fallback and for non-Yandex sources).
+- `YANDEX_PROXY`, `YANDEX_HTTP_PROXY`, `YANDEX_GRPC_PROXY_*`: optional proxy settings for Yandex API/Ynison.
+- `YANDEX_OAUTH_CLIENT_ID`: used by external authorization frontend from related repositories.
+
 ## Deployment
 
 To deploy using Docker:
