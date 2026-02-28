@@ -19,6 +19,7 @@ services:
     networks:
       - internal_network
   telegram-bot-api:
+    profiles: ["selfhosted-telegram-api"]
     image: ghcr.io/es3n1n/telegram-bot-api:latest
     restart: unless-stopped
     container_name: nowplaying-bot-api
@@ -32,6 +33,7 @@ services:
       - default_network
       - internal_network
   bot-api-janitor:
+    profiles: ["selfhosted-telegram-api"]
     image: bot-api-janitor:latest
     restart: unless-stopped
     container_name: nowplaying-bot-api-janitor
@@ -49,8 +51,6 @@ services:
       - "31337:1337"
     depends_on:
       postgres:
-        condition: service_started
-      telegram-bot-api:
         condition: service_started
     env_file:
       - .env
